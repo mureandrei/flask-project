@@ -1,5 +1,4 @@
 # Work order app
-Flask app using GraphQL
 
 This app uses SQLite for persisting the data. All the Queries and mutations are done via GraphQL
 
