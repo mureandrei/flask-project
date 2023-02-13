@@ -50,13 +50,5 @@ def graphql():
     status_code = 200 if success else 400
     return jsonify(result), status_code
 
-@app.route("/test", methods=["POST"])
-def omg():
-    customer = Customer.query.get(1)
-    work_order = WorkOrder(customer=customer.id, work_order_type="INSTALL", schedule="dwdwddw")
-    db.session.add(work_order)
-    db.session.commit()
-    return work_order.to_dict()
-
 if __name__ == "__main__":
     app.run(debug=True)
