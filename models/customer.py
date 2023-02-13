@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from ..db import db
+from db import db
 
 class Customer(db.Model):
     __tablename__ = "customers"

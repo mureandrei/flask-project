@@ -1,8 +1,8 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Enum
 
-from ..models.customer import Customer
-from ..db import db
-from .enums.work_order_type import WorkOrderType
+from models.customer import Customer
+from db import db
+from models.enums.work_order_type import WorkOrderType
 
 
 class WorkOrder(db.Model):

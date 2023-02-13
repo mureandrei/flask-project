@@ -2,7 +2,7 @@ import datetime
 import re
 
 from flask_sqlalchemy import SQLAlchemy
-from ..models.customer import Customer
+from models.customer import Customer
 
 INVALID_EMAIL_ERROR = "Invalid email address format"
 INVALID_SCHEDULE_ERROR = "Invalid schedule time format"
@@ -29,8 +29,9 @@ class Validator:
 
     def _filter_errors(self, errors):
         filtered_errors = filter(lambda error: error != None, errors)
-        if filtered_errors:
-            return [error for error in filtered_errors]
+        filtered_errors = [error for error in filtered_errors]
+        if len(filtered_errors):
+            return filtered_errors
         return None
     
     def _validate_schedule(self, schedule) -> str | None:

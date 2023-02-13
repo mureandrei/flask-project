@@ -2,14 +2,14 @@ from ariadne import ObjectType, graphql_sync, load_schema_from_path, make_execut
 from ariadne.constants import PLAYGROUND_HTML
 from flask import Flask, request, jsonify
 
-from .gql_queries import (resolve_create_customer,
+from gql_queries import (resolve_create_customer,
                           resolve_create_work_order,
                           resolve_customer,
                           resolve_customers,
                           resolve_work_order,
                           resolve_work_orders)
-from .db import db
-from . import conf
+from db import db
+import conf
 
 # graphql
 query = ObjectType("Query")

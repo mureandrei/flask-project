@@ -13,12 +13,15 @@ Run the following command to install the dependencies:
 
 Open a terminal, go to the project directory and run the following command:
 
-`flask run`
+`python3 app.py`
 
 ## Run included postman examples
 
 In the file structure you can find a postman collection `flask-app.postman_collection.json` which you can run to see some Mutation and Query examples
 
 
-TODO:
-Add unit tests
+## Run unit tests
+
+Open a terminal, go to the project directory and run the following command:
+
+`python3 -m pytest`

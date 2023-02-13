@@ -1,9 +1,9 @@
 from ariadne import convert_kwargs_to_snake_case
 
-from .validation.validators import Validator
-from .models.work_order import WorkOrder
-from .models.customer import Customer
-from .db import db
+from validation.validators import Validator
+from models.work_order import WorkOrder
+from models.customer import Customer
+from db import db
 
 
 def resolve_customers(obj, info) -> object | None:
