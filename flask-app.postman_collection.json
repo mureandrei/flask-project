@@ -13,7 +13,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation newCustomer {\n  createCustomer(firstName:\"John\", lastName:\"Doe\", address: \"testing address\", emailAddress: \"abc@test.com\", phoneNumber: \"0743256778\") {\n      customer {\n      firstName\n      lastName\n      emailAddress\n      }\n      errors\n  }\n}",
+						"query": "mutation newCustomer {\n  createCustomer(firstName:\"John\", lastName:\"Doe\", address: \"testing address\", emailAddress: \"abc@test.com\", phoneNumber: \"0743256778\") {\n      customer {\n      firstName\n      lastName\n      emailAddress\n      phoneNumber\n      }\n      errors\n  }\n}",
 						"variables": ""
 					}
 				},
@@ -42,7 +42,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation newWorkOrder {\n  createWorkOrder(workOrderType: INSTALL, schedule: \"10-12-2022\", customerId: \"1\") {\n      workOrder {\n        workOrderType\n        customer {\n          firstName\n          lastName\n        }\n      }\n      errors\n  }\n}",
+						"query": "mutation newWorkOrder {\n  createWorkOrder(workOrderType: INSTALL, schedule: \"10-12-2022\", customerId: \"1\") {\n      workOrder {\n        workOrderType\n        schedule\n        customer {\n          firstName\n          lastName\n          address\n          emailAddress\n          phoneNumber\n        }\n      }\n      errors\n  }\n}",
 						"variables": ""
 					}
 				},
@@ -71,7 +71,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query test {\n    customers {\n        id\n        firstName\n        lastName\n        phoneNumber\n    }\n}",
+						"query": "query test {\n    customers {\n        id\n        firstName\n        lastName\n        address\n        emailAddress\n        phoneNumber\n    }\n}",
 						"variables": ""
 					},
 					"options": {
@@ -98,7 +98,41 @@
 			"response": []
 		},
 		{
-			"name": "GQL - 4. Get all work orders",
+			"name": "GQL - 4. Get customer by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query test {\n    customer(customerId: 1) {\n        id\n        firstName\n        lastName\n        address\n        emailAddress\n        phoneNumber\n    }\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/graphql",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GQL - 5. Get all work orders",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -106,6 +140,35 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "query getWorkOrders {\n    workOrders {\n        schedule\n        workOrderType\n        customer {\n            firstName\n            emailAddress\n        }\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/graphql",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GQL - 6. Get work order by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query getWorkOrders {\n    workOrder(workOrderId: 1) {\n        schedule\n        workOrderType\n        customer {\n            firstName\n            emailAddress\n        }\n    }\n}",
 						"variables": ""
 					}
 				},
