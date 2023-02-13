@@ -17,11 +17,21 @@ type Customer {
     phoneNumber: String!
 }
 
+type CustomerResponse {
+    errors: [String]
+    customer: Customer
+}
+
 type WorkOrder {
     id: ID!
     workOrderType: WorkOrderType!
     schedule: String!
     customer: Customer!
+}
+
+type WorkOrderResponse {
+    errors: [String]
+    workOrder: WorkOrder
 }
 
 type Query {
@@ -32,6 +42,6 @@ type Query {
 }
 
 type Mutation {
-    createCustomer(firstName: String!, lastName: String!, address: String!, emailAddress: String!, phoneNumber: String!): Customer!
-    createWorkOrder(workOrderType: WorkOrderType!, schedule: String!, customerId: ID!): WorkOrder!
+    createCustomer(firstName: String!, lastName: String!, address: String!, emailAddress: String!, phoneNumber: String!): CustomerResponse!
+    createWorkOrder(workOrderType: WorkOrderType!, schedule: String!, customerId: ID!): WorkOrderResponse!
 }

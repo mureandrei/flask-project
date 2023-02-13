@@ -13,7 +13,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation newCustomer {\n  createCustomer(firstName:\"John\", lastName:\"Doe\", address: \"testing address\", emailAddress: \"abc@test.com\", phoneNumber: \"242132\") {\n      firstName\n      lastName\n      emailAddress\n  }\n}",
+						"query": "mutation newCustomer {\n  createCustomer(firstName:\"John\", lastName:\"Doe\", address: \"testing address\", emailAddress: \"abc@test.com\", phoneNumber: \"0743256778\") {\n      customer {\n      firstName\n      lastName\n      emailAddress\n      }\n      errors\n  }\n}",
 						"variables": ""
 					}
 				},
@@ -42,7 +42,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation newWorkOrder {\n  createWorkOrder(workOrderType: INSTALL, schedule: \"10.12.2022\", customerId: \"1\") {\n      workOrderType\n      customer {\n          firstName\n          lastName\n      }\n  }\n}",
+						"query": "mutation newWorkOrder {\n  createWorkOrder(workOrderType: INSTALL, schedule: \"10-12-2022\", customerId: \"1\") {\n      workOrder {\n        workOrderType\n        customer {\n          firstName\n          lastName\n        }\n      }\n      errors\n  }\n}",
 						"variables": ""
 					}
 				},
@@ -68,8 +68,20 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query test {\n    customers {\n        id\n        firstName\n        lastName\n        phoneNumber\n    }\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/customer",
+					"raw": "http://127.0.0.1:5000/graphql",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -79,7 +91,7 @@
 					],
 					"port": "5000",
 					"path": [
-						"customer"
+						"graphql"
 					]
 				}
 			},
