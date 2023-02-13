@@ -63,7 +63,8 @@ def resolve_create_work_order(obj, info, work_order_type, schedule, customer_id)
         return {"errors": errors}
     customer = Customer.query.get(customer_id)
     work_order = WorkOrder(customer=customer.id,
-                           work_order_type=work_order_type, schedule=schedule)
+                           work_order_type=work_order_type,
+                           schedule=schedule)
     db.session.add(work_order)
     db.session.commit()
     return {"work_order": work_order.to_dict()}

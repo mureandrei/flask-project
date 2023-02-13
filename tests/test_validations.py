@@ -1,15 +1,6 @@
 from models.enums.work_order_type import WorkOrderType
 from validation.validators import Validator
-
-FIRST_NAME = "firstNameTest"
-LAST_NAME = "firstNameTest"
-ADDRESS = "addressTest"
-VALID_PHONE_NUMBER = "0743256778"
-INVALID_PHONE_NUMBER  = "invalidPhone"
-INVALID_EMAIL = "invalidEmail"
-VALID_EMAIL = "abc@test.com"
-VALID_SCHEDULE = "12-10-2023"
-INVALID_SCHEDULE = "111111"
+import tests.constants as constants
 
 class MockSession:
     def __init__(self):
@@ -30,11 +21,11 @@ validator = Validator(MockDB())
 
 def test_invalid_customer_email_phone():
     customer_fields = {
-        'first_name': FIRST_NAME,
-        'last_name': LAST_NAME,
-        'address': ADDRESS,
-        'phone_number': INVALID_PHONE_NUMBER,
-        'email_address': INVALID_EMAIL
+        'first_name': constants.FIRST_NAME,
+        'last_name': constants.LAST_NAME,
+        'address': constants.ADDRESS,
+        'phone_number': constants.INVALID_PHONE_NUMBER,
+        'email_address': constants.INVALID_EMAIL
     }
     errors = validator.validate_customer(**customer_fields)
     assert len(errors) == 2
@@ -43,11 +34,11 @@ def test_invalid_customer_email_phone():
 
 def test_invalid_customer_email():
     customer_fields = {
-        'first_name': FIRST_NAME,
-        'last_name': LAST_NAME,
-        'address': ADDRESS,
-        'phone_number': VALID_PHONE_NUMBER,
-        'email_address': INVALID_EMAIL
+        'first_name': constants.FIRST_NAME,
+        'last_name': constants.LAST_NAME,
+        'address': constants.ADDRESS,
+        'phone_number': constants.VALID_PHONE_NUMBER,
+        'email_address': constants.INVALID_EMAIL
     }
     errors = validator.validate_customer(**customer_fields)
     assert len(errors) == 1
@@ -55,11 +46,11 @@ def test_invalid_customer_email():
 
 def test_invalid_customer_phone():
     customer_fields = {
-        'first_name': FIRST_NAME,
-        'last_name': LAST_NAME,
-        'address': ADDRESS,
-        'phone_number': INVALID_PHONE_NUMBER,
-        'email_address': VALID_EMAIL
+        'first_name': constants.FIRST_NAME,
+        'last_name': constants.LAST_NAME,
+        'address': constants.ADDRESS,
+        'phone_number': constants.INVALID_PHONE_NUMBER,
+        'email_address': constants.VALID_EMAIL
     }
     errors = validator.validate_customer(**customer_fields)
     assert len(errors) == 1
@@ -67,11 +58,11 @@ def test_invalid_customer_phone():
 
 def test_valid_customer():
     customer_fields = {
-        'first_name': FIRST_NAME,
-        'last_name': LAST_NAME,
-        'address': ADDRESS,
-        'phone_number': VALID_PHONE_NUMBER,
-        'email_address': VALID_EMAIL
+        'first_name': constants.FIRST_NAME,
+        'last_name': constants.LAST_NAME,
+        'address': constants.ADDRESS,
+        'phone_number': constants.VALID_PHONE_NUMBER,
+        'email_address': constants.VALID_EMAIL
     }
     errors = validator.validate_customer(**customer_fields)
     assert errors == None
@@ -79,7 +70,7 @@ def test_valid_customer():
 def test_valid_work_order():
     work_order_fields = {
         "customer_id": 1,
-        "schedule": VALID_SCHEDULE,
+        "schedule": constants.VALID_SCHEDULE,
         "work_order_type": WorkOrderType.INSTALL.value
     }
     validator.db.session.set_session_get_return_value({"customer": "customer"})
@@ -89,7 +80,7 @@ def test_valid_work_order():
 def test_invalid_work_order_customer_id():
     work_order_fields = {
         "customer_id": 1,
-        "schedule": VALID_SCHEDULE,
+        "schedule": constants.VALID_SCHEDULE,
         "work_order_type": WorkOrderType.INSTALL.value
     }
     validator.db.session.set_session_get_return_value(None)
@@ -100,7 +91,7 @@ def test_invalid_work_order_customer_id():
 def test_invalid_work_order_schedule():
     work_order_fields = {
         "customer_id": 1,
-        "schedule": INVALID_SCHEDULE,
+        "schedule": constants.INVALID_SCHEDULE,
         "work_order_type": WorkOrderType.INSTALL.value
     }
     validator.db.session.set_session_get_return_value({"customer": "customer"})
@@ -111,7 +102,7 @@ def test_invalid_work_order_schedule():
 def test_invalid_work_order_schedule_customer_id():
     work_order_fields = {
         "customer_id": 1,
-        "schedule": INVALID_SCHEDULE,
+        "schedule": constants.INVALID_SCHEDULE,
         "work_order_type": WorkOrderType.INSTALL.value
     }
     validator.db.session.set_session_get_return_value(None)
