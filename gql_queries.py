@@ -1,8 +1,6 @@
 from ariadne import convert_kwargs_to_snake_case
 
 from .validation.validators import Validator
-
-from .models.enums.work_order_type import WorkOrderType
 from .models.work_order import WorkOrder
 from .models.customer import Customer
 from .db import db

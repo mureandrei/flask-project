@@ -2,12 +2,14 @@ from ariadne import ObjectType, graphql_sync, load_schema_from_path, make_execut
 from ariadne.constants import PLAYGROUND_HTML
 from flask import Flask, request, jsonify
 
-from .gql_queries import resolve_create_customer, resolve_create_work_order, resolve_customer, resolve_customers, resolve_work_order, resolve_work_orders
+from .gql_queries import (resolve_create_customer,
+                          resolve_create_work_order,
+                          resolve_customer,
+                          resolve_customers,
+                          resolve_work_order,
+                          resolve_work_orders)
 from .db import db
 from . import conf
-from .models.enums.work_order_type import WorkOrderType
-from .models.customer import Customer
-from .models.work_order import WorkOrder
 
 # graphql
 query = ObjectType("Query")
@@ -33,9 +35,11 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+
 @app.route("/graphql", methods=["GET"])
 def graphql_playground():
     return PLAYGROUND_HTML, 200
+
 
 @app.route("/graphql", methods=["POST"])
 def graphql():
@@ -49,6 +53,7 @@ def graphql():
 
     status_code = 200 if success else 400
     return jsonify(result), status_code
+
 
 if __name__ == "__main__":
     app.run(debug=True)
